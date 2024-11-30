@@ -1,0 +1,52 @@
+
+.infos_container{
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerTechs {
+    height: 100%;
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .containerSocialMedia {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    .titleSocialMedia {
+      color: #fff;
+    }
+  
+    .containerIcons {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      margin-top: 10px;
+  
+      .iconLink {
+        display: inline-block;
+        img {
+          max-width: 30px;
+          height: auto;
+        }
+      }
+    }
+  }
+  

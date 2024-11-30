@@ -1,0 +1,65 @@
+"use client"
+
+import React, { useState } from 'react';
+import Image from 'next/image';
+import styles from './Messages.module.scss';
+import PostBox from '../../molecules/Post/Post';
+
+const Messages: React.FC = () => {
+  const [message, setMessage] = useState('');
+  
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
+  };
+
+  const handleSendMessage = () => {
+    if (message.trim()) {
+      console.log('Message sent:', message);
+      setMessage('');
+    }
+  };
+
+  return (
+    <main className={styles.containerMessages}>
+      <Image
+        className={styles.postitLogo}
+        src="/assets/logo_postit.webp"
+        alt="Logo do Postit"
+        width={70}
+        height={70}
+      />
+      <div className={styles.listPost}>
+       <PostBox />
+       <PostBox />
+       <PostBox />
+       <PostBox />
+       <PostBox />
+      </div>
+
+      <div className={styles.containerSendMessage}>
+        <textarea
+          className={styles.messageInput}
+          value={message}
+          onChange={handleChange}
+          placeholder="Insira sua mensagem"
+          maxLength={150}
+          minLength={1}
+        ></textarea>
+        <button
+          className={styles.messageButton}
+          onClick={handleSendMessage}
+        >
+          <Image
+            className={styles.sendLogo}
+            src="/assets/logo_postit.webp"
+            alt="Logo do Postit"
+            width={50}
+            height={50}
+          />
+        </button>
+      </div>
+    </main>
+  );
+};
+
+export default Messages;

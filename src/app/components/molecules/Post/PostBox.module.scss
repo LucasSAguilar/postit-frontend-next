@@ -1,0 +1,47 @@
+.article {
+    min-width: 250px;
+    width: 50%;
+    max-width: 600px;
+    background-color: #312f2f;
+    padding: 15px;
+    border: 2px solid #b168ff;
+    box-shadow: -5px 5px 3px 0 #7b00ffb0;
+    transition: 0.4s;
+  
+    &__header {
+      width: 100%;
+      border-bottom: 1px solid #ffffff;
+      padding-bottom: 10px;
+    }
+  
+    &__line_one {
+      display: flex;
+      width: 100%;
+      align-items: baseline;
+      color: #b168ff;
+      margin-bottom: 5px;
+    }
+  
+    &__title {
+      margin-right: 10px;
+      border-right: 1px solid #b168ff;
+      padding-right: 5px;
+    }
+  
+    &__date {
+      color: #ffffffc2;
+    }
+  
+    &__role {
+    }
+  
+    &__content {
+      margin-top: 15px;
+      color: #ffffff;
+    }
+  
+    &:hover {
+      box-shadow: -10px 10px 3px 0 #7b00ff;
+    }
+  }
+  

@@ -1,0 +1,44 @@
+.home_page{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    .containerDown {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+        height: 150px;
+
+        .text {
+            margin-bottom: 20px;
+        }
+
+        .arrow {
+            animation: moveArrow 1s infinite;
+            transition: 0.2s;
+        }
+
+        .arrow:hover {
+            filter: drop-shadow(4px 4px 1px #4e1491);
+        }
+    }
+}
+
+
+@keyframes moveArrow {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
