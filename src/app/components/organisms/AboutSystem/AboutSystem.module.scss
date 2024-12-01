@@ -10,16 +10,18 @@
 
 .containerTechs {
     height: 100%;
-    width: 50%;
+    width: 60%;
     padding: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    gap: 20px;
     flex-wrap: wrap;
     align-items: center;
   }
   
   .containerSocialMedia {
+    margin: 30px 0;
     height: 10%;
     width: 100%;
     display: flex;
@@ -46,6 +48,10 @@
           max-width: 30px;
           height: auto;
         }
+      }
+
+      .iconLink:hover {
+        scale: 1.1
       }
     }
   }

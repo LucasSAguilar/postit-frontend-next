@@ -7,6 +7,21 @@
   flex-direction: column;
   justify-content: space-around;
 
+
+  .button_exit {
+    padding: 10px;
+    background-color: #ff00003d;
+    border: 1px solid #FF0000;
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+  }
+
+  .button_exit:hover {
+    background-color: #ff000073;
+  }
+
   .postitLogo {
     width: 70px;
     margin: 15px auto;
@@ -55,6 +70,8 @@
     border: 2px solid #8a2cf5;
     padding: 10px;
     border-radius: 2px;
+
+
 
     .messageInput {
       width: 90%;

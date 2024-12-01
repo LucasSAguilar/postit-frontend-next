@@ -1,26 +1,27 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import styles from './Messages.module.scss';
-import PostBox from '../../molecules/Post/Post';
+import React, { useState } from "react";
+import Image from "next/image";
+import styles from "./Messages.module.scss";
+import PostBox from "../../molecules/Post/Post";
 
 const Messages: React.FC = () => {
-  const [message, setMessage] = useState('');
-  
+  const [message, setMessage] = useState("");
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
 
   const handleSendMessage = () => {
     if (message.trim()) {
-      console.log('Message sent:', message);
-      setMessage('');
+      console.log("Message sent:", message);
+      setMessage("");
     }
   };
 
   return (
     <main className={styles.containerMessages}>
+      <button className={styles.button_exit}>Encerrar sessão</button>
       <Image
         className={styles.postitLogo}
         src="/assets/logo_postit.webp"
@@ -29,11 +30,11 @@ const Messages: React.FC = () => {
         height={70}
       />
       <div className={styles.listPost}>
-       <PostBox />
-       <PostBox />
-       <PostBox />
-       <PostBox />
-       <PostBox />
+        <PostBox />
+        <PostBox />
+        <PostBox />
+        <PostBox />
+        <PostBox />
       </div>
 
       <div className={styles.containerSendMessage}>
@@ -45,10 +46,7 @@ const Messages: React.FC = () => {
           maxLength={150}
           minLength={1}
         ></textarea>
-        <button
-          className={styles.messageButton}
-          onClick={handleSendMessage}
-        >
+        <button className={styles.messageButton} onClick={handleSendMessage}>
           <Image
             className={styles.sendLogo}
             src="/assets/logo_postit.webp"

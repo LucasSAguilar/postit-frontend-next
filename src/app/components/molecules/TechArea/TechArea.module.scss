@@ -3,6 +3,7 @@
     border-radius: 8px;
     height: 200px;
     width: 200px;
+    transition: 0.2s;
     padding: 15px;
   
     &__header_card {
@@ -39,5 +40,9 @@
         }
       }
     }
+  }
+
+  .area:hover {
+    scale: 1.1;
   }
   
