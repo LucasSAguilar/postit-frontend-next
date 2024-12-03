@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import styles from "./Messages.module.scss";
 import PostBox from "../../molecules/Post/Post";
+import { AuthContext } from "@/app/contexts/Auth/AuthContext";
 
 const Messages: React.FC = () => {
   const [message, setMessage] = useState("");
+
+  const { testarContext }: any = useContext(AuthContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
