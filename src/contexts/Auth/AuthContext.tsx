@@ -18,9 +18,11 @@ export const AuthProvider = ({ children }: any) => {
   };
 
   useEffect(() => {
-    checkUserCookie();
+    setTimeout(() => {
+      checkUserCookie(); // Executa após a renderização inicial.
+    }, 0);
   }, []);
-
+  
   return (
     <AuthContext.Provider value={{ isLogged, user, doLogin, doLogout }}>
       {children}

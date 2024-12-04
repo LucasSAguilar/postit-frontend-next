@@ -1,15 +1,34 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Messages.module.scss";
 import PostBox from "../../molecules/Post/Post";
-import { AuthContext } from "@/app/contexts/Auth/AuthContext";
+import { useRouter } from "next/navigation";
+import IPost from "@/types/PostInterface";
+import collectAllPosts from "@/lib/api/posts/collectAllPosts";
 
 const Messages: React.FC = () => {
   const [message, setMessage] = useState("");
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const route = useRouter();
 
-  const { testarContext }: any = useContext(AuthContext);
+  const definePosts = async () => {
+    const data = await collectAllPosts();
+    console.log(data);
+
+    if (data.success) {
+      const dados = data.posts;
+      setPosts(dados);
+    } else {
+      console.log("Erro ao buscar posts:", data.message);
+      setPosts([]);
+    }
+  };
+
+  useEffect(() => {
+    definePosts();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
@@ -24,7 +43,12 @@ const Messages: React.FC = () => {
 
   return (
     <main className={styles.containerMessages}>
-      <button className={styles.button_exit}>Encerrar sessão</button>
+      <button
+        className={styles.button_exit}
+        onClick={() => route.push("/login")}
+      >
+        Encerrar sessão
+      </button>
       <Image
         className={styles.postitLogo}
         src="/assets/logo_postit.webp"
@@ -33,11 +57,11 @@ const Messages: React.FC = () => {
         height={70}
       />
       <div className={styles.listPost}>
-        <PostBox />
-        <PostBox />
-        <PostBox />
-        <PostBox />
-        <PostBox />
+        {posts.length > 0 ? (
+          posts.map((post) => <PostBox key={post._id} {...post} />)
+        ) : (
+          <div>Nenhum post encontrado</div>
+        )}
       </div>
 
       <div className={styles.containerSendMessage}>
