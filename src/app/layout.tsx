@@ -1,4 +1,5 @@
 // import { AuthProvider } from "../contexts/Auth/AuthContext";
+import { AuthProvider } from "@/contexts/Auth/AuthContext";
 import "./globals.css";
 
 export const metadata = {
@@ -14,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

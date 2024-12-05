@@ -1,16 +1,27 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import styles from "./login.module.scss";
 import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/contexts/Auth/AuthContext";
+import IUser from "@/types/UserInterface";
 
 export default function Login() {
-
   const route = useRouter();
+  const context = useContext(AuthContext);
+  const [user, setUser] = useState<IUser>({ name: "", role: "" });
 
-  const handleLogin = () => {
-    route.push("/home");
-  }
+  const handleLogin = async (user: IUser) => {
+    try {
+      const response = await context.doLogin(user);
+      if (response) {
+        route.push("/home");
+      }
+    } catch (error: any) {
+      console.log(error.message || "Erro ao autenticar");
+    }
+  };
 
   return (
     <main className={styles.login_main}>
@@ -40,6 +51,7 @@ export default function Login() {
               name="name"
               className={styles.input_field}
               placeholder="Insira seu nome"
+              onChange={(e) => setUser({ ...user, name: e.target.value })}
               required
             />
           </div>
@@ -54,11 +66,16 @@ export default function Login() {
               name="role"
               className={styles.input_field}
               placeholder="Ex: Desenvolvedor Frontend"
+              onChange={(e) => setUser({ ...user, role: e.target.value })}
               required
             />
           </div>
 
-          <button type="button" onClick={handleLogin} className={styles.submit_button}>
+          <button
+            type="button"
+            onClick={() => handleLogin(user)}
+            className={styles.submit_button}
+          >
             Entrar
           </button>
         </form>
@@ -72,21 +89,20 @@ export default function Login() {
             alt="Ícone do Linkedin"
             width={10}
             height={10}
-
           />
           <Image
             className={styles.social_icon}
             src="/assets/icons/rs/github.svg"
             alt="Ícone do Github"
             width={10}
-height={10}
+            height={10}
           />
           <Image
             className={styles.social_icon}
             src="/assets/icons/rs/web.svg"
             alt="Ícone do meu portfólio"
             width={10}
-height={10}
+            height={10}
           />
         </div>
       </section>

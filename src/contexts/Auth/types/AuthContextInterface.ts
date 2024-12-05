@@ -1,8 +1,8 @@
-import IUser from "./UserInterface";
+import IUser from "../../../types/UserInterface";
 
 export interface IAuthContext {
   isLogged: boolean;
   user: IUser;
-  doLogin: () => void;
-  doLogout: () => void;
+  doLogin: (user: IUser) => Promise<boolean>;
+  doLogout: () => boolean;
 }
