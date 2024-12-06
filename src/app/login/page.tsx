@@ -3,9 +3,12 @@
 import Image from "next/image";
 import styles from "./login.module.scss";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/Auth/AuthContext";
 import IUser from "@/types/UserInterface";
+import AuthUser from "@/services/api/auth/AuthUser";
+import { jwtDecode } from "jwt-decode";
+import Cookie from "js-cookie";
 
 export default function Login() {
   const route = useRouter();
@@ -13,16 +16,27 @@ export default function Login() {
   const [user, setUser] = useState<IUser>({ name: "", role: "" });
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleLogin = async (user: IUser) => {
+  const doLogin = async () => {
     try {
-      const response = await context.doLogin(user);
-      if (response) {
-        route.push("/home");
-      }
+      const response = await AuthUser(user);
+      context.setIsLogged(true);
+      context.setUser(user);
+
+      const decodedToken: any = jwtDecode(response.token);
+      const expirationTime = decodedToken.exp * 1000;
+      Cookie.set("token", response.token, { expires: expirationTime });
+
+      route.push("/home");
     } catch (error: any) {
+      context.setIsLogged(false);
+      context.setUser({ name: "", role: "" });
       setErrorMessage(error.message || "Erro ao autenticar");
     }
   };
+
+  useEffect(() => {
+    Cookie.get("token") ? route.push("/home") : null;
+  }, []);
 
   return (
     <main className={styles.login_main}>
@@ -74,7 +88,7 @@ export default function Login() {
           <p className={styles.errorMessage}>{errorMessage}</p>
           <button
             type="button"
-            onClick={() => handleLogin(user)}
+            onClick={() => doLogin()}
             className={styles.submit_button}
           >
             Entrar

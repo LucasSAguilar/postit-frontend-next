@@ -1,17 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Messages.module.scss";
 import PostBox from "../../molecules/Post/Post";
 import { useRouter } from "next/navigation";
 import IPost from "@/types/PostInterface";
 import collectAllPosts from "@/lib/api/posts/collectAllPosts";
+import { AuthContext } from "@/contexts/Auth/AuthContext";
+import Cookie from "js-cookie";
 
 const Messages: React.FC = () => {
   const [message, setMessage] = useState("");
   const [posts, setPosts] = useState<IPost[]>([]);
   const route = useRouter();
+  const context = useContext(AuthContext);
 
   const definePosts = async () => {
     const data = await collectAllPosts();
@@ -24,6 +27,12 @@ const Messages: React.FC = () => {
       console.log("Erro ao buscar posts:", data.message);
       setPosts([]);
     }
+  };
+
+  const doLogout = () => {
+    Cookie.remove("token");
+    context.setIsLogged(false);
+    route.push("/login");
   };
 
   useEffect(() => {
@@ -43,10 +52,7 @@ const Messages: React.FC = () => {
 
   return (
     <main className={styles.containerMessages}>
-      <button
-        className={styles.button_exit}
-        onClick={() => route.push("/login")}
-      >
+      <button className={styles.button_exit} onClick={() => doLogout()}>
         Encerrar sessão
       </button>
       <Image
