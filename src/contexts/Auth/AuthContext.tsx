@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { IAuthContext } from "./types/AuthContextInterface";
 import AuthUser from "@/services/api/auth/AuthUser";
 import IUser from "../../types/UserInterface";
+import Cookie from "js-cookie";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
@@ -14,10 +15,11 @@ export const AuthProvider = ({ children }: any) => {
   // ====================
   const doLogin = async (user: IUser): Promise<boolean> => {
     try {
-      await AuthUser(user);
+      const response = await AuthUser(user);
       setIsLogged(true);
       setUser(user);
-      return true;
+      Cookie.set("token", response.token);
+      return false;
     } catch (error: any) {
       setIsLogged(false);
       setUser({ name: "", role: "" });
@@ -26,13 +28,15 @@ export const AuthProvider = ({ children }: any) => {
   };
 
   const doLogout = () => {
+    Cookie.remove("token");
     setIsLogged(false);
     return true;
   };
   // ====================
 
   const checkUserCookie = () => {
-    console.log("Verificando cookie...");
+    console.log(Cookie.get("token"));
+
   };
 
   useEffect(() => {

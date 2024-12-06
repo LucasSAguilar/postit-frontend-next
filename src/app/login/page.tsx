@@ -11,6 +11,7 @@ export default function Login() {
   const route = useRouter();
   const context = useContext(AuthContext);
   const [user, setUser] = useState<IUser>({ name: "", role: "" });
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleLogin = async (user: IUser) => {
     try {
@@ -19,7 +20,7 @@ export default function Login() {
         route.push("/home");
       }
     } catch (error: any) {
-      console.log(error.message || "Erro ao autenticar");
+      setErrorMessage(error.message || "Erro ao autenticar");
     }
   };
 
@@ -70,7 +71,7 @@ export default function Login() {
               required
             />
           </div>
-
+          <p className={styles.errorMessage}>{errorMessage}</p>
           <button
             type="button"
             onClick={() => handleLogin(user)}

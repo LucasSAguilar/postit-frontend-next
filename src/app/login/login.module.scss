@@ -113,6 +113,13 @@
   .social_icon:hover {
     transform: scale(1.1);
   }
+
+  .errorMessage{
+    color: #ff8989;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+  }
   
   @media (max-width: 768px) {
     .input_label {
