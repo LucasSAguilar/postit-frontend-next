@@ -98,27 +98,33 @@ export default function Login() {
         <p className={styles.social_media_text}>Acesse minhas redes sociais</p>
 
         <div className={styles.social_media_links}>
-          <Image
-            className={styles.social_icon}
-            src="/assets/icons/rs/linkedin.svg"
-            alt="Ícone do Linkedin"
-            width={10}
-            height={10}
-          />
-          <Image
-            className={styles.social_icon}
-            src="/assets/icons/rs/github.svg"
-            alt="Ícone do Github"
-            width={10}
-            height={10}
-          />
-          <Image
-            className={styles.social_icon}
-            src="/assets/icons/rs/web.svg"
-            alt="Ícone do meu portfólio"
-            width={10}
-            height={10}
-          />
+          <a href="https://www.linkedin.com/in/lucasaguilardesenvolvedor/">
+            <Image
+              className={styles.social_icon}
+              src="/assets/icons/rs/linkedin.svg"
+              alt="Ícone do Linkedin"
+              width={10}
+              height={10}
+            />
+          </a>
+          <a href="https://github.com/LucasSAguilar">
+            <Image
+              className={styles.social_icon}
+              src="/assets/icons/rs/github.svg"
+              alt="Ícone do Github"
+              width={10}
+              height={10}
+            />
+          </a>
+          <a href="https://lucasdesenvolvedor.vercel.app">
+            <Image
+              className={styles.social_icon}
+              src="/assets/icons/rs/web.svg"
+              alt="Ícone do meu portfólio"
+              width={10}
+              height={10}
+            />
+          </a>
         </div>
       </section>
     </main>
