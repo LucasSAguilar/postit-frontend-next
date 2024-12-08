@@ -5,5 +5,6 @@ export interface IAuthContext {
   user: IUser;
   setIsLogged: (isLogged: boolean) => void;
   setUser: (user: IUser) => void;
+  hasCookieLogin: () => boolean;
 
 }

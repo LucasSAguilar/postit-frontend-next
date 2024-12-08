@@ -24,6 +24,7 @@ export default function Login() {
 
       const decodedToken: any = jwtDecode(response.token);
       const expirationTime = decodedToken.exp * 1000;
+      Cookie.set("user", JSON.stringify(user), { expires: expirationTime });
       Cookie.set("token", response.token, { expires: expirationTime });
 
       route.push("/home");
@@ -35,7 +36,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    Cookie.get("token") ? route.push("/home") : null;
+    context.hasCookieLogin() ? route.push("/home") : null;
   }, []);
 
   return (

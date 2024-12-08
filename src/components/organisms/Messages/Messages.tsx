@@ -9,6 +9,7 @@ import IPost from "@/types/PostInterface";
 import collectAllPosts from "@/lib/api/posts/collectAllPosts";
 import { AuthContext } from "@/contexts/Auth/AuthContext";
 import Cookie from "js-cookie";
+import insertNewPost from "@/lib/api/posts/insertNewPost";
 
 const Messages: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -36,19 +37,32 @@ const Messages: React.FC = () => {
     route.push("/login");
   };
 
+  const sendPost = async () => {
+    try {
+      const post: IPost = {
+        content: message,
+        name: context.user.name,
+        role: context.user.role,
+        createdAt: new Date().toISOString(),
+      };
+      const response = await insertNewPost(post);
+      if (!response.ok) {
+        console.log(response.message || "Erro ao enviar post");
+        return;
+      }
+      setMessage("");
+      definePosts();
+    } catch (error: any) {
+      console.log(error.message || "Não foi possível enviar o post");
+    }
+  };
+
   useEffect(() => {
     definePosts();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
-  };
-
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      console.log("Message sent:", message);
-      setMessage("");
-    }
   };
 
   return (
@@ -80,7 +94,7 @@ const Messages: React.FC = () => {
           maxLength={150}
           minLength={1}
         ></textarea>
-        <button className={styles.messageButton} onClick={handleSendMessage}>
+        <button className={styles.messageButton} onClick={() => sendPost()}>
           <Image
             className={styles.sendLogo}
             src="/assets/logo_postit.webp"

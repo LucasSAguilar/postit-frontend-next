@@ -1,5 +1,5 @@
 export default interface IPost {
-    _id: string
+    _id?: string
     name: string,
     role: string,
     content: string,
