@@ -6,12 +6,12 @@ const collectAllPosts = async (): Promise<ResponseAllPostsInterface> => {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/post/all`
     );
-    
+
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     return {
-      success: false,
-      message: "Erro ao buscar posts: " + error,
+      ok: false,
+      message: `Ocorreu um erro ao buscar os posts: ${error.message}`,
       posts: [],
     };
   }

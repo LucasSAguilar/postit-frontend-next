@@ -12,19 +12,20 @@ import Cookie from "js-cookie";
 
 const Messages: React.FC = () => {
   const [message, setMessage] = useState("");
+  const [aviso, setAviso] = useState("Nenhum post encontrado");
   const [posts, setPosts] = useState<IPost[]>([]);
   const route = useRouter();
   const context = useContext(AuthContext);
 
   const definePosts = async () => {
-    const data = await collectAllPosts();
-    console.log(data);
-
-    if (data.success) {
-      const dados = data.posts;
-      setPosts(dados);
-    } else {
-      console.log("Erro ao buscar posts:", data.message);
+    try {
+      const data = await collectAllPosts();
+      setPosts(data.posts);
+      if (!data.ok) {
+        setAviso(data.message || "Ocorreu um erro ao procurar pelos posts.");
+      }
+    } catch (error: any) {
+      setAviso(error.message || "Ocorreu um erro ao procurar pelos posts.");
       setPosts([]);
     }
   };
@@ -66,7 +67,7 @@ const Messages: React.FC = () => {
         {posts.length > 0 ? (
           posts.map((post) => <PostBox key={post._id} {...post} />)
         ) : (
-          <div>Nenhum post encontrado</div>
+          <div>{aviso}</div>
         )}
       </div>
 
