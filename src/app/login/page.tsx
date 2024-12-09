@@ -9,11 +9,13 @@ import IUser from "@/types/UserInterface";
 import AuthUser from "@/services/api/auth/AuthUser";
 import { jwtDecode } from "jwt-decode";
 import Cookie from "js-cookie";
+import CookiesAlert from "@/components/molecules/CookiesAlert/CookiesAlert";
 
 export default function Login() {
   const route = useRouter();
   const context = useContext(AuthContext);
   const [user, setUser] = useState<IUser>({ name: "", role: "" });
+  const [showCookiesAlert, setShowCookiesAlert] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const doLogin = async () => {
@@ -128,6 +130,10 @@ export default function Login() {
           </a>
         </div>
       </section>
+      <CookiesAlert
+          showComponent={showCookiesAlert}
+          onDismiss={() => setShowCookiesAlert(false)}
+        />
     </main>
   );
 }
