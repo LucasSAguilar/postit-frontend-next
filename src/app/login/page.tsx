@@ -15,10 +15,12 @@ export default function Login() {
   const route = useRouter();
   const context = useContext(AuthContext);
   const [user, setUser] = useState<IUser>({ name: "", role: "" });
+  const [buttonText, setButtonText] = useState<string>("Entrar");
   const [showCookiesAlert, setShowCookiesAlert] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const doLogin = async () => {
+    setButtonText("Aguarde...");
     try {
       const response = await AuthUser(user);
       context.setIsLogged(true);
@@ -28,12 +30,13 @@ export default function Login() {
       const expirationTime = decodedToken.exp * 1000;
       Cookie.set("user", JSON.stringify(user), { expires: expirationTime });
       Cookie.set("token", response.token, { expires: expirationTime });
-
       route.push("/home");
     } catch (error: any) {
       context.setIsLogged(false);
       context.setUser({ name: "", role: "" });
       setErrorMessage(error.message || "Erro ao autenticar");
+    } finally {
+      setButtonText("Entrar");
     }
   };
 
@@ -131,9 +134,9 @@ export default function Login() {
         </div>
       </section>
       <CookiesAlert
-          showComponent={showCookiesAlert}
-          onDismiss={() => setShowCookiesAlert(false)}
-        />
+        showComponent={showCookiesAlert}
+        onDismiss={() => setShowCookiesAlert(false)}
+      />
     </main>
   );
 }
