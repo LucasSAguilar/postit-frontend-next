@@ -1,5 +1,6 @@
-import React from 'react';
-import styles from './TechArea.module.scss';
+import React from "react";
+import styles from "./TechArea.module.scss";
+import Image from "next/image";
 
 interface TechAreaProps {
   color: string;
@@ -8,12 +9,27 @@ interface TechAreaProps {
   items: string[];
 }
 
-const TechArea: React.FC<TechAreaProps> = ({ color, title, imageSrc, items }) => {
+const TechArea: React.FC<TechAreaProps> = ({
+  color,
+  title,
+  imageSrc,
+  items,
+}) => {
   return (
     <article className={styles.area} style={{ border: `1px solid ${color}` }}>
       <header className={styles.area__header_card}>
-        {imageSrc && <img className={styles.area__image} src={imageSrc} alt="Imagem da área" />}
-        <h2 className={styles.area__title} style={{ color }}>{title}</h2>
+        {imageSrc && (
+          <Image
+            height={80}
+            width={80}
+            className={styles.area__image}
+            src={imageSrc}
+            alt="Imagem da área"
+          />
+        )}
+        <h2 className={styles.area__title} style={{ color }}>
+          {title}
+        </h2>
       </header>
       {items.length > 0 && (
         <ul className={styles.area__list}>
