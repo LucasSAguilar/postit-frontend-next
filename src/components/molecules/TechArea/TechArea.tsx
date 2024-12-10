@@ -20,8 +20,8 @@ const TechArea: React.FC<TechAreaProps> = ({
       <header className={styles.area__header_card}>
         {imageSrc && (
           <Image
-            height={80}
-            width={80}
+            height={30}
+            width={30}
             className={styles.area__image}
             src={imageSrc}
             alt="Imagem da área"

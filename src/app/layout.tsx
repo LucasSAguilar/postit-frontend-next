@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <head>
-      <title>Meu Site</title>
+      <title>Postit</title>
       <link rel="icon" href="/assets/logo_postit.webp"/>
       </head>
       <body>
