@@ -7,34 +7,34 @@ const AboutSystem = () => {
     <div className={styles.infos_container}>
       <section className={styles.containerTechs}>
         <TechArea
-          title="Technology Area"
+          title="Banco de dados"
           imageSrc="/assets/icons/database.svg"
-          items={["Computers", "Mobile Phones", "AI"]}
-          color="#bc00eb"
+          items={["MongoDB", "NoSQL", "MongoDB Compass", "MongoDB Atlas", "Mongoose"]}
+          color="#ea3ef7"
         />
         <TechArea
-          title="Technology Area"
-          imageSrc="/assets/icons/database.svg"
-          items={["Computers", "Mobile Phones", "AI"]}
-          color="#bc00eb"
+          title="Back-end"
+          imageSrc="/assets/icons/console.svg"
+          items={["NodeJS", "NestJS", "Typescript", "Express", "JWT", "Class Validator", "Class Transformer", "Docker"]}
+          color="#75f94c"
         />
         <TechArea
-          title="Technology Area"
-          imageSrc="/assets/icons/database.svg"
-          items={["Computers", "Mobile Phones", "AI"]}
-          color="#bc00eb"
+          title="Front-end"
+          imageSrc="/assets/icons/screen.svg"
+          items={["Next", "Typescript", "React", "SCSS", "Axios", "Styled Components", "Atomic Design"]}
+          color="#8b2cf5"
         />
         <TechArea
-          title="Technology Area"
-          imageSrc="/assets/icons/database.svg"
-          items={["Computers", "Mobile Phones", "AI"]}
-          color="#bc00eb"
+          title="Devops"
+          imageSrc="/assets/icons/devops.svg"
+          items={["Render", "Vercel", "Git"]}
+          color="#f29d38"
         />
         <TechArea
-          title="Technology Area"
-          imageSrc="/assets/icons/database.svg"
-          items={["Computers", "Mobile Phones", "AI"]}
-          color="#bc00eb"
+          title="Ferramentas"
+          imageSrc="/assets/icons/tools.svg"
+          items={["VSCode", "Insomnia", "Postman", "Figma", "Trello", "Notion"]}
+          color="#73fbfd"
         />
       </section>
 
